@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="report_quotation_xls" model="ir.actions.report">
+            <field name="name">Quotations Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.quotation_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_flight_int_quotation_xls" model="ir.actions.report">
+            <field name="name">Flight International Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.quotationflight_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="report_flight_quotation_xls" model="ir.actions.report">
+            <field name="name">Flight Domestic Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.quotationflight_domestic_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="report_accomodation_quotation_xls" model="ir.actions.report">
+            <field name="name">Accomodation Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.accomodation_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="report_program_quotation_xls" model="ir.actions.report">
+            <field name="name">Progrm Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.program_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="report_visa_quotation_xls" model="ir.actions.report">
+            <field name="name">Visa Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.visa_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="report_visa_transfer_xls" model="ir.actions.report">
+            <field name="name">Transfer Excel</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">details.transfer_xls</field>
+            <field name="report_file">report</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

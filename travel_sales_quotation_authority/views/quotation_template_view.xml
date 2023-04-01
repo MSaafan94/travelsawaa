@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_view_templete_list_inherit" model="ir.ui.view">
+            <field name="name">sale.tree.new</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sale_management.sale_order_template_view_tree"/>
+            <field name="groups_id" eval="[(6, 0,
+                [ref('sales_extra_fields.group_user_quotation_template')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+<record id="sale_view_templete_nocreate_view_inherit" model="ir.ui.view">
+            <field name="name">sale.form.new</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sales_extra_fields.sale_order_template_form_inh"/>
+            <field name="groups_id" eval="[(6, 0,
+                [ref('sales_extra_fields.group_user_quotation_template')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

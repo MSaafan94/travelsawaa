@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="sale_order_form_revised_inh">
+          <field name="name">sale.order.form.revised.inh</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+          <field name="arch" type="xml">
+                <xpath expr="//tree//field[@name='state']" position="before">
+                        <field name="revised" groups="account.group_account_manager"/>
+                        <field name="completed"/>
+
+                </xpath>
+          </field>
+      </record>
+      <record model="ir.ui.view" id="sale_order_form_inhh">
+            <field name="name">sale.order.form.inhh</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='sale_order_template_id']" position="attributes">-->
+<!--                          <attribute name="required">True</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='analytic_account_id']" position="attributes">-->
+<!--                          <attribute name="required">True</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='roommate_name']" position="after">
+                    <field name="individual" invisible="1"/>
+                    <field name="due_date" invisible="1"/>
+                    <field name="year" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="completed" attrs="{'invisible':[('individual', '=', 'group')]}"/>
+                    <field name="revised" attrs="{'invisible':[('individual', '=', 'group'),]}"  groups="account.group_account_manager"/>
+                </xpath>
+
+                <xpath expr="//field[@name='name_of_persons']" position="after">
+                    <field name="adult_inv" attrs="{'invisible': [('individual', '!=', 'individual')],'readonly': [('state','=','sale')]}"/>
+                    <field name="child_inv" attrs="{'invisible': [('individual', '!=', 'individual')],'readonly': [('state','=','sale')]}"/>
+                    <field name="infant_inv" attrs="{'invisible': [('individual', '!=', 'individual')],'readonly': [('state','=','sale')]}"/>
+                    <field name="adult" attrs="{'invisible': [('individual', '=', 'individual')]}"/>
+                    <field name="child" attrs="{'invisible': [('individual', '=', 'individual')]}"/>
+                    <field name="infant" attrs="{'invisible': [('individual', '=', 'individual')]}"/>
+                    <label for="analytic_account_id"/>
+                    <div class="o_row">
+                            <field name="analytic_account_id"/>
+                            <button name="generate" string="Generate" type="object"  attrs="{'invisible': [('individual', '!=', 'individual')]}" />
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                     <attribute name="attrs">{'readonly':[('state','not in',('draft','sent','update'))]}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='attachments']" position="after">
+                    <page string="Accommodation" name="accommodation" >
+                        <notebook>
+                            <page string="Main" name="main" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation"   nolabel="1" >
+                                    <tree editable="bottom" >
+                                        <field name="partner_id" invisible="1"/>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="city_home"/>
+
+<!--                                        <field name="individual" invisible="1"/>-->
+                                        <field name="gender" />
+                                        <field name="age_type"/>
+                                        <field name="relation"/>
+                                        <field name="phone_number"/>
+                                        <field name="whatsapp_num"/>
+                                        <field name="age_on_travel_date" />
+                                        <field name="hotel_name" widget="many2many_tags"/>
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+                            <page string="Main" name="main_inv" attrs="{'invisible':[('individual', '!=', 'individual')]}">
+                                <field name="sale_order_accommodation_inv"   nolabel="1" >
+                                    <tree editable="bottom" >
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="individual" invisible="1"/>
+                                        <field name="nationality"/>
+                                        <field name="city_name"/>
+                                        <field name="hotel_name" widget="many2many_tags"/>
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_type"/>
+                                        <field name="room_view"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                        <field name="supplier"/>
+                                        <field name="cost"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="City1" name="city1"  groups="sales_team.group_sale_manager" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation1" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="age_on_travel_date" invisible="1"/>
+                                        <field name="hotel_name" widget="many2many_tags"  options="{'no_create_edit': True}" />
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="City2" name="city2" groups="sales_team.group_sale_manager" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation2" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="age_on_travel_date" invisible="1"/>
+                                        <field name="hotel_name" widget="many2many_tags"  options="{'no_create_edit': True}" />
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+<!--                                        <field name="room_view"/>-->
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="City3" name="city3" groups="sales_team.group_sale_manager" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation3" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+
+                                        <field name="name"/>
+                                        <field name="age_on_travel_date" invisible="1"/>
+                                        <field name="hotel_name" widget="many2many_tags"  options="{'no_create_edit': True}" />
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             <page string="City4" name="city4" groups="sales_team.group_sale_manager" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation4" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+
+                                        <field name="name"/>
+                                        <field name="age_on_travel_date" invisible="1"/>
+                                        <field name="hotel_name" widget="many2many_tags"  options="{'no_create_edit': True}" />
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             <page string="City5" name="city5" groups="sales_team.group_sale_manager" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation5" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="age_on_travel_date" invisible="1"/>
+                                        <field name="hotel_name" widget="many2many_tags"  options="{'no_create_edit': True}" />
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             <page string="City6" name="city6" groups="sales_team.group_sale_manager" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_accommodation6" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="age_on_travel_date" invisible="1"/>
+                                        <field name="hotel_name" widget="many2many_tags"  options="{'no_create_edit': True}" />
+                                        <field name="check_in_date"/>
+                                        <field name="check_out_date"/>
+                                        <field name="no_of_nights"/>
+                                        <field name="room_id"/>
+                                        <field name="room_type" context="{'default_room_type': 'Double Twin Bed'}"/>
+                                        <field name="room_view"/>
+                                        <field name="room_special_request" widget="many2many_tags"/>
+                                        <field name="meal_plan"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </page>
+                    <page string="Flight">
+                        <notebook>
+                            <page string="Flight International" name="flightInt" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_flight_int" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="individual" invisible="1"/>
+                                        <field name="age_type"/>
+                                        <field name="flight_status"/>
+                                        <field name="flight_type"/>
+                                        <field name="route"/>
+                                        <field name="supplier"/>
+                                        <field name="hold_dead_line"/>
+                                        <field name="booking_ref_pic"/>
+                                        <field name="booking_ref"/>
+                                        <field name="extra_luggage"/>
+                                        <field name="dep_flight_no"/>
+                                        <field name="dept_date"/>
+                                        <field name="arr_date"/>
+                                        <field name="deb_flight_route"/>
+                                        <field name="transit_city"/>
+                                        <field name="transit_time"/>
+                                        <field name="arr_flight_no" string="ARR Flight NO"/>
+                                        <field name="deptt_date"/>
+                                        <field name="arrr_date"/>
+                                        <field name="arr_flight_route"/>
+                                        <field name="transitt_city"/>
+                                        <field name="transitt_time"/>
+                                        <field name="attachment"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             <page string="Flight" name="flightInt" attrs="{'invisible':[('individual', '!=', 'individual')]}">
+                                <field name="sale_order_flight_int_inv" attrs="{'readonly':[('state','=','done')]}" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="individual" invisible="1"/>
+                                        <field name="route"/>
+                                        <field name="age_type"/>
+                                        <field name="booking_ref"/>
+                                        <field name="dept_date"/>
+                                        <field name="arr_date"/>
+                                        <field name="extra_luggage"/>
+                                        <field name="supplier"/>
+                                        <field name="cost"/>
+                                    </tree>
+                                </field>
+                             </page>
+                            <page string="Flight Domestic" name="flightDom" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                                <field name="sale_order_flight_dom" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="sale_order_template_id" invisible="1"/>
+                                        <field name="name"/>
+                                        <field name="age_type"/>
+                                        <field name="flight_status"/>
+                                        <field name="flight_type"/>
+                                        <field name="route"/>
+                                        <field name="supplier"/>
+                                        <field name="hold_dead_line"/>
+                                        <field name="booking_ref_pic"/>
+                                        <field name="booking_ref"/>
+                                        <field name="extra_luggage"/>
+                                        <field name="dep_flight_no"/>
+                                        <field name="dept_date"/>
+                                        <field name="arr_date"/>
+                                        <field name="deb_flight_route"/>
+                                        <field name="transit_city"/>
+                                        <field name="transit_time"/>
+                                        <field name="arr_flight_no"/>
+                                        <field name="deptt_date"/>
+                                        <field name="arrr_date"/>
+                                        <field name="arr_flight_route"/>
+                                        <field name="transitt_city"/>
+                                        <field name="transitt_time"/>
+                                        <field name="attachment"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                      </notebook>
+                     </page>
+                     <page string="Visa" name="visa" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                            <field name="sale_order_visa" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+
+                                    <field name="name"/>
+                                    <field name="gender"/>
+                                    <field name="relation"/>
+                                    <field name="nationality"/>
+                                    <field name="age_on_travel_date"/>
+                                    <field name="age_type"/>
+                                    <field name="visa_type"/>
+                                    <field name="visa_situation"/>
+                                    <field name="embassy_appointment"/>
+                                    <field name="receiving_date"/>
+                                    <field name="notes"/>
+                                    <field name="fake_ticket"/>
+                                    <field name="voucher"/>
+                                    <field name="attachment"/>
+                                </tree>
+                            </field>
+                    </page>
+                    <page string="Visa" name="visa" attrs="{'invisible':[('individual', '!=', 'individual')]}">
+                            <field name="sale_order_visa_inv" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="visa_type"/>
+                                    <field name="age_type"/>
+                                    <field name="destination"/>
+                                    <field name="visa_situation"/>
+                                    <field name="embassy_appointment"/>
+                                    <field name="relation"/>
+                                    <field name="supplier"/>
+                                    <field name="cost"/>
+                                     <field name="fake_ticket"/>
+                                    <field name="voucher"/>
+<!--                                    <field name="receiving_date"/>-->
+
+                                </tree>
+                            </field>
+                    </page>
+                    <page string="Medical Insurance" name="medical" attrs="{'invisible':[('individual', '=', 'individual')]}">
+
+                            <field name="sale_order_medical" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="age_on_travel_date"/>
+                                    <field name="medical_insurance"/>
+                                    <field name="cost"/>
+                                </tree>
+                            </field>
+                    </page>
+                    <page string="Medical Insurance" name="medical" attrs="{'invisible':[('individual', '!=', 'individual')]}">
+
+                            <field name="sale_order_medical_inv" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="cost"/>
+                                    <field name="supplier"/>
+                                </tree>
+                            </field>
+                    </page>
+
+                    <page string="Vaccination" name="vaccination" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                            <field name="sale_order_vaccination_inv" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="age_type"/>
+                                    <field name="qr_code"/>
+                                    <field name="pcr_required"/>
+                                    <field name="vaccine_type"/>
+                                    <field name="last_dose_date"/>
+                                    <field name="attachment"/>
+                                    <field name="notes"/>
+                                </tree>
+                            </field>
+                    </page>
+                    <page string="Vaccination" name="vaccination" attrs="{'invisible':[('individual', '!=', 'individual')]}">
+                            <field name="sale_order_vaccination" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="pcr_required"/>
+                                    <field name="attachment"/>
+                                </tree>
+                            </field>
+                    </page>
+                     <page string="Program" name="program" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                            <field name="sale_order_program" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="age_type"/>
+                                    <field name="status"/>
+                                    <field name="program_name" widget="many2many_tags"/>
+                                    <field name="description"/>
+                                    <field name="supplier"/>
+                                </tree>
+                            </field>
+                    </page>
+                    <page string="Program" name="program" attrs="{'invisible':[('individual', '!=', 'individual')]}">
+                            <field name="sale_order_program_inv" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="age_type"/>
+                                    <field name="program_name" widget="many2many_tags"/>
+                                    <field name="description"/>
+                                    <field name="supplier"/>
+                                    <field name="cost"/>
+                                </tree>
+                            </field>
+                    </page>
+                     <page string="Transfer" name="transfer" attrs="{'invisible':[('individual', '=', 'individual')]}">
+                            <field name="sale_order_transfer" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="vehicle_type"/>
+                                    <field name="date_of_transfer"/>
+                                    <field name="pick_up_time" widget='float_time' />
+                                    <field name="route"/>
+                                    <field name="transfer_cost"/>
+                                    <field name="supplier"/>
+                                </tree>
+                            </field>
+                    </page>
+                    <page string="Transfer" name="transfer" attrs="{'invisible':[('individual', '=', False)]}">
+                            <field name="sale_order_transfer_inv" attrs="{'readonly':[('state','=','done')]}" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="vehicle_type"/>
+                                    <field name="date_of_transfer"/>
+                                    <field name="pick_up_time" widget='float_time' />
+                                    <field name="route"/>
+                                    <field name="transfer_cost"/>
+                                    <field name="supplier"/>
+                                    <field name="cost"/>
+                                </tree>
+                            </field>
+                    </page>
+                </xpath>
+            </field>
+      </record>
+  </data>
+</odoo>

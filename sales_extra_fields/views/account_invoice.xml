@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="invoice_form_trip_reference" model="ir.ui.view">
+    <field name="name">Account invoice (form) - add Trip reference</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="sale_order_template_id"/>
+        </xpath>
+        <div class="oe_button_box" position="inside">
+            <button name="toggle_active" type="object" icon="fa-archive" class="oe_stat_button">
+                <field name="active" widget="boolean_button" options='{"terminology": "archive"}' />
+            </button>
+        </div>
+    </field>
+</record>
+</odoo>

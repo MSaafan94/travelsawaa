@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="flight_view_form" model="ir.ui.view">
+            <field name="name">flight_view_form</field>
+            <field name="model">flight</field>
+            <field name="arch" type="xml">
+                <form string="Flight">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="flight_view_tree" model="ir.ui.view">
+            <field name="name">flight_view_tree</field>
+            <field name="model">flight</field>
+            <field name="arch" type="xml">
+                <tree string="Flight">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="flight_action" model="ir.actions.act_window">
+            <field name="name">Flight</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">flight</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="flight_menu" name="Flight" action="flight_action"
+              parent="sale.menu_sale_config"/>
+    </data>
+</odoo>

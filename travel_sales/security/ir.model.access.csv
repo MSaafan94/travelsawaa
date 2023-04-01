@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_payment_wizard,travel_sales.payment_wizard,model_payment_wizard,,1,0,0,0
+access_model_payments_required,access.payments,model_payments_payments,,1,1,1,1

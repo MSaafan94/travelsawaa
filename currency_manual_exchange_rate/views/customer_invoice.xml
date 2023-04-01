@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="view_invoice_form_currency_rate_inherit" model="ir.ui.view">
+			<field name="name">view.invoice.form.currency.rate.inherit</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_form"/>
+			<field name="arch" type="xml">
+				<field name="user_id" position="after">
+					<field name="manual_currency_rate_active" groups="base.group_multi_currency"/>
+					<field name="manual_currency_rate" attrs="{'invisible': [('manual_currency_rate_active', '=', False)],'required':[('manual_currency_rate_active', '=', True)]}" groups="base.group_multi_currency"/>
+				</field>
+			</field>
+		</record>
+		
+		<record id="view_invoice_supplier_form_currency_rate_inherit" model="ir.ui.view">
+			<field name="name">view.invoice.supplier.currency.rate.inherit</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="arch" type="xml">
+				<field name="date_due" position="after">
+					<field name="manual_currency_rate_active" groups="base.group_multi_currency"/>
+					<field name="manual_currency_rate" attrs="{'invisible': [('manual_currency_rate_active', '=', False)],'required':[('manual_currency_rate_active', '=', True)]}" groups="base.group_multi_currency"/>
+				</field>
+			</field>
+		</record>
+    </data>
+</odoo>

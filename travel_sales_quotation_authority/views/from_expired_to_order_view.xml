@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="confirm_aorder" model="ir.actions.server">
+            <field name="name">to sale</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="groups" ref="sales_extra_fields.group_manager_quotation_template"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">records.action_confirm_order()</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="full_sale_flight_report"
+                model="sale.order"
+                string="flight report"
+                name="details.full_sale_flight_templete"
+                file="details.full_sale_flight_templete"
+                report_type="qweb-pdf"/>
+
+        <template id="full_sale_flight_templete">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">age type</th>
+                                            <th scope="col">flight status</th>
+                                            <th scope="col">flight type  </th>
+                                            <th scope="col">extra luggage</th>
+                                            <th scope="col">route</th>
+                                        </thead>
+                                                <tbody>
+                                                  <t t-foreach="docs" t-as="doc">
+                                                      <t t-foreach="doc.sale_order_flight_int" t-as="flight">
+                                                          <tr>
+                                                            <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                            <td><span t-field="flight.name"/></td>
+                                                            <td><span t-field="flight.age_type"/></td>
+                                                            <td> <t t-esc="flight.flight_status"/></td>
+                                                            <td> <t t-esc="flight.flight_type"/></td>
+                                                            <td> <t t-esc="flight.extra_luggage"/></td>
+                                                            <td> <t t-esc="flight.route"/></td>
+                                                          </tr>
+                                                      </t>
+                                            </t>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                    </t>
+                </t>
+        </template>
+
+    </data>
+</odoo>

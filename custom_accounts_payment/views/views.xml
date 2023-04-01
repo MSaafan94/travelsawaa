@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Add creditcard to res.partner -->
+        <record id="view_partners_form_payment_custom_account" model="ir.ui.view">
+                <field name="name">view.res.partner.form.custom.account</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='property_account_payable_id']" position="after">
+                        <group string="custom Receivable" col="2">
+                        <field name="custom_receivable_id"/>
+                        </group>
+                    </xpath>
+                </field>
+        </record>
+
+        <!-- Action confirm_payments for multi -->
+        <record id="action_account_lock_payments" model="ir.actions.server">
+            <field name="name">Lock Payments</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="binding_model_id" ref="account.model_account_payment"/>
+            <field name="code">
+                records.action_lock()
+            </field>
+        </record>
+
+        <record id="payment_state_form_inherit" model="ir.ui.view">
+            <field name="name">payment.state.form.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='post']" position="after">
+                    <button name="action_lock" states="posted" string="Lock" type="object" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="locked_move_id" states="locked" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

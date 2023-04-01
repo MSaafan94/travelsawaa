@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+       <record id="see_records" model="ir.rule">
+            <field name="name">See folders</field>
+            <field name="model_id" ref="model_documents_folder"/>
+            <field name="domain_force">["|",("users_ids","=",user.id),("all","=",True)]</field>
+            <field name="groups" eval="[(4,ref('documents.group_documents_user')),(4,ref('documents.group_documents_manager'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template inherit_id="accounting_pdf_reports.report_generalledger" id="inherit_report_generalledger">
+        <xpath expr="//tr[1]" position="replace">
+                 <tr>
+                     <th>Date</th>
+                 <th>JRNL</th>
+                 <th>Partner</th>
+                 <th>Ref</th>
+                 <th>Move</th>
+                 <th>Entry Label</th>
+                 <th>Debit</th>
+                 <th>Credit</th>
+                 <th>Balance debit</th>
+                 <th>Balance Credit</th>
+                 <th groups="base.group_multi_currency">Currency</th>
+                 </tr>
+        </xpath>
+        <xpath expr="//tbody[1]//tr[1]//td[4]" position="replace">
+            <td class="text-right">
+                <span t-esc="account['balance']" t-if="account['balance'] and account['balance'] &gt; 0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+            </td>
+            <td class="text-right">
+                <span t-esc="account['balance']*-1" t-if="account['balance']  and account['balance'] &lt;0"  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+            </td>
+
+        </xpath>
+        <xpath expr="//tbody[1]//tr[2]//td[9]" position="replace">
+            <td class="text-right">
+                <span t-esc="line['balance']" t-if="line['balance'] and line['balance'] &gt; 0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+            </td>
+            <td class="text-right">
+                <span t-esc="line['balance']*-1" t-if="line['balance']  and line['balance'] &lt;0"  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+            </td>
+
+        </xpath>
+
+    </template>
+</odoo>

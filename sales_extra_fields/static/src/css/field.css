@@ -1,0 +1,4 @@
+.custom_class table thead > tr > th:nth-child(3) {
+    width: 150px;
+    text-align: center;
+}

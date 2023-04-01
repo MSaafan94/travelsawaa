@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="crm_probabilty">
+      <field name="name">crm_probabilty</field>
+      <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='probability']" position="attributes">
+              <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//group" position="before">
+              <div>
+              <h2>
+                  <span>Probability </span>
+                  <field name="custom_probability"/>
+                  <span> %</span>
+              </h2>
+              </div>
+              <div>
+              <label for ='passport_check' string="passport"/>
+              <field name="passport_check"/>
+<!--                          </div>-->
+              <label for ='professional_job_check' string="professional job"/>
+              <field name="professional_job_check"/>
+              <label for ='bank_account_check' string="bank account"/>
+              <field name="bank_account_check"/>
+              <label for ='visas_check' string="visa"/>
+              <field name="visas_check"/>
+              <label for ='bachelor_check' string="bachelor"/>
+              <field name="bachelor_check"/>
+              </div>
+          </xpath>
+      </field>
+    </record>
+
+
+<!--                                <div class="col">-->
+<!--                                    <label for="planned_revenue" class="oe_edit_only" />-->
+<!--                                    <div class="o_row">-->
+<!--                                        <field name="company_currency" invisible="1"/>-->
+<!--                                        <field name="planned_revenue" class="oe_inline" widget='monetary' options="{'currency_field': 'company_currency'}"/>-->
+<!--                                        <span class="oe_grey"> at </span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+  </data>
+</odoo>

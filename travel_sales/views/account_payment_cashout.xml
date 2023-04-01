@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_report_payment_cashout"
+            model="account.payment"
+            string="Payment Cash Out"
+            report_type="qweb-pdf"
+            name="travel_sales.report_payment_cashout"
+            file="travel_sales.report_payment_cashout"
+            menu="True"
+        />
+    </data>
+</odoo>

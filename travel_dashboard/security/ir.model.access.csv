@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_dashboard_travel_dashboard,travel_dashboard.travel_dashboard,model_custom_sales_dashboard,,1,1,1,1

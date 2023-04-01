@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="documents_folder_form_inherit" model="ir.ui.view">
+            <field name="name">documents.documents_folder.form</field>
+            <field name="model">documents.folder</field>
+            <field name="inherit_id" ref="documents.folder_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_ids']" position="after">
+                    <field name="users_ids" widget="many2many_tags"/>
+                    <field name="all"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

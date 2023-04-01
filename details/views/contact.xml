@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+            <record model="ir.ui.view" id="contact_form">
+          <field name="name">contact.formm</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+          <field name="arch" type="xml">
+                <xpath expr="//field[@name='birthday']" position="replace">
+                        <field name="birthday" required="1"/>
+                </xpath>
+          </field>
+
+      </record>
+  </data>
+</odoo>

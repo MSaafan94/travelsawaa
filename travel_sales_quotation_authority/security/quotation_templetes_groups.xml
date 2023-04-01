@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="quotation_templetes_category">
+            <field name="name">trip reference</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="group_quotation_templetes_individual" model="res.groups">
+            <field name="name">Individual</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="travel_sales_quotation_authority.quotation_templetes_category"/>
+        </record>
+
+        <record id="group_quotation_templetes_operation" model="res.groups">
+            <field name="name">Operation</field>
+            <field name="category_id" ref="travel_sales_quotation_authority.quotation_templetes_category"/>
+        </record>
+        <record id="group_quotation_templetes_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="travel_sales_quotation_authority.quotation_templetes_category"/>
+<!--            <field name="implied_ids" eval="[(4, ref('group_quotation_templetes_operation')),(4, ref('group_quotation_templetes_individual'))]"/>-->
+        </record>
+        <record id="see_individual_records" model="ir.rule">
+            <field name="name">See individual references</field>
+            <field name="model_id" ref="details.model_sale_order_template"/>
+            <field name="domain_force">[("individual","=",True)]</field>
+            <field name="groups" eval="[(4,ref('travel_sales_quotation_authority.group_quotation_templetes_individual'))]"/>
+        </record>
+        <record id="see_operation_records" model="ir.rule">
+            <field name="name">See operation references</field>
+            <field name="model_id" ref="details.model_sale_order_template"/>
+            <field name="domain_force">[("operation","=",True)]</field>
+            <field name="groups" eval="[(4,ref('travel_sales_quotation_authority.group_quotation_templetes_operation'))]"/>
+        </record>
+        <record id="see_manager_records" model="ir.rule">
+            <field name="name">See manager references</field>
+            <field name="model_id" ref="details.model_sale_order_template"/>
+            <field name="domain_force">[(1,"=",1)]</field>
+            <field name="groups" eval="[(4,ref('travel_sales_quotation_authority.group_quotation_templetes_manager'))]"/>
+        </record>
+
+
+
+    </data>
+</odoo>

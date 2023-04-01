@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="report_sale_flight"
+                model="sale.order"
+                string="Quotations report"
+                name="details.sale_flight"
+                file="details.sale_flight"
+                report_type="qweb-pdf"/>
+
+<!--        <report-->
+<!--            id="quotations_xlsx"-->
+<!--            model="sale.order"-->
+<!--            string="Quotation report exel"-->
+<!--            report_type="xlsx"-->
+<!--            name="details.quotation_xls"-->
+<!--            file="details.quotation_xls"-->
+<!--            attachment_use="False"-->
+<!--        />-->
+
+        <template id="sale_flight">
+            <t t-call="web.html_container">
+                    <t t-set="grp_counter" t-value="0"/>
+                    <t t-set="sys_counter" t-value="0"/>
+                    <t t-set="without_counter" t-value="0"/>
+                    <t t-set="extra_bag_on_arr_counter" t-value="0"/>
+                    <t t-set="extra_bag_apr_dep_counter" t-value="0"/>
+                    <t t-set="extra_bag_on_dep_counter" t-value="0"/>
+                    <t t-set="hold_counter" t-value="0"/>
+                    <t t-set="issued_counter" t-value="0"/>
+                    <t t-set="waiting_issuing_counter" t-value="0"/>
+                    <t t-set="sent_to_client_counter" t-value="0"/>
+                    <t t-set="dep_counter" t-value="0"/>
+                    <t t-set="arv_counter" t-value="0"/>
+                    <t t-set="depandarv_counter" t-value="0"/>
+                    <t t-set="dom_grp_counter" t-value="0"/>
+                    <t t-set="dom_sys_counter" t-value="0"/>
+                    <t t-set="dom_without_counter" t-value="0"/>
+                    <t t-set="dom_extra_bag_on_arr_counter" t-value="0"/>
+                    <t t-set="dom_extra_bag_apr_dep_counter" t-value="0"/>
+                    <t t-set="dom_extra_bag_on_dep_counter" t-value="0"/>
+                    <t t-set="dom_hold_counter" t-value="0"/>
+                    <t t-set="dom_issued_counter" t-value="0"/>
+                    <t t-set="dom_waiting_issuing_counter" t-value="0"/>
+                    <t t-set="dom_sent_to_client_counter" t-value="0"/>
+                    <t t-set="dom_dep_counter" t-value="0"/>
+                    <t t-set="dom_arv_counter" t-value="0"/>
+                    <t t-set="dom_depandarv_counter" t-value="0"/>
+                        <t t-call="web.external_layout">
+
+                            <div class="page">
+
+<!--                                <t t-foreach="aa" t-as="obj">-->
+<!--                                    <div ><t t-esc="obj.get('a')"/></div>-->
+<!--                                </t>-->
+
+                                     <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">serial</th>
+                                                <th scope="col">passenger</th>
+                                                <th scope="col">age</th>
+                                                <th scope="col">age type</th>
+                                                <th scope="col">relationship</th>
+                                                <th scope="col">whatsApp</th>
+                                                <th scope="col">nights</th>
+                                                <th scope="col">room id</th>
+                                                <th scope="col">room type</th>
+                                                <th scope="col">Notes</th>
+
+<!--                                                <th scope="col">flight status</th>-->
+<!--                                                <th scope="col">flight type int </th>-->
+<!--                                                <th scope="col">flight type dom</th>-->
+<!--                                                <th scope="col">flight notes</th>-->
+<!--                                                <th scope="col">vise status</th>-->
+<!--                                                <th scope="col">receiving </th>-->
+<!--                                                <th scope="col">program</th>-->
+
+
+<!--                                                <th scope="col">sales person</th>-->
+<!--                                                <th scope="col">total sd</th>-->
+<!--                                                <th scope="col">total paid</th>-->
+<!--                                                <th scope="col">total Due</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.sale_order_accommodation" t-as="accomodtion">
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="accomodtion.name"/></td>
+                                                    <td><span t-field="accomodtion.age"/></td>
+                                                    <td><span t-field="accomodtion.age_type"/></td>
+                                                    <td><span t-field="accomodtion.relation"/></td>
+                                                    <td><span t-field="accomodtion.whatsapp_num"/></td>
+                                                    <td><span t-field="accomodtion.no_of_nights"/></td>
+                                                    <td><span t-field="accomodtion.room_id"/></td>
+                                                    <td><span t-field="accomodtion.room_type"/></td>
+                                                    <td><span t-field="accomodtion.notes"/></td>
+                                                </tr>
+                                            </t>
+                                            </t>
+                                        </tbody>
+                                 </table>
+
+                                <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">flight status</th>
+                                            <th scope="col">flight type  </th>
+                                            <th scope="col">extra luggage</th>
+                                        </thead>
+                                                <tbody>
+                                                  <t t-foreach="docs" t-as="doc">
+                                                    <t t-foreach="doc.sale_order_flight_int" t-as="flight">
+                                                    <t  t-set="grp_counter"  t-if="flight.flight_type=='int_grp'" t-value="grp_counter + 1"/>
+                                                    <t  t-set="sys_counter"  t-if="flight.flight_type=='int_sys'" t-value="sys_counter + 1"/>
+                                                    <t  t-set="without_counter"  t-if="flight.flight_type=='without_flight'" t-value="without_counter + 1"/>
+                                                    <t  t-set="extra_bag_on_arr_counter"  t-if="flight.extra_luggage=='extra_bag_on_arr' " t-value="extra_bag_on_arr_counter + 1"/>
+                                                    <t  t-set="extra_bag_apr_dep_counter"  t-if="flight.extra_luggage=='extra_bag_apr_dep'" t-value="extra_bag_apr_dep_counter + 1"/>
+                                                    <t  t-set="extra_bag_on_dep_counter"  t-if="flight.extra_luggage=='extra_bag_on_dep'" t-value="extra_bag_on_dep_counter + 1"/>
+                                                    <t  t-set="hold_counter"  t-if="flight.flight_status=='hold'" t-value="hold_counter + 1"/>
+                                                    <t  t-set="issued_counter"  t-if="flight.flight_status=='issued'" t-value="issued_counter + 1"/>
+                                                    <t  t-set="waiting_issuing_counter"  t-if="flight.flight_status=='waiting_issuing'" t-value="waiting_issuing_counter + 1"/>
+                                                    <t  t-set="sent_to_client_counter"  t-if="flight.flight_status=='sent_to_client'" t-value="sent_to_client_counter + 1"/>
+                                                    <t  t-set="depandarv_counter"  t-if="flight.route and flight.route!='arrival_only' and flight.route!='departure_only'" t-value="depandarv_counter + 1"/>
+                                                    <t  t-set="dep_counter"  t-if="flight.route=='departure_only'" t-value="dep_counter + 1"/>
+                                                    <t  t-set="arv_counter"  t-if="flight.route=='arrival_only'" t-value="arv_counter + 1"/>
+                                                      <tr>
+                                                        <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                        <td><span t-field="flight.name"/></td>
+                                                        <td> <t t-esc="flight.flight_status"/></td>
+                                                        <td> <t t-esc="flight.flight_type"/></td>
+                                                        <td> <t t-esc="flight.extra_luggage"/></td>
+                                                      </tr>
+                                            </t>
+                                          </t>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">flight status domestic</th>
+                                            <th scope="col">flight type  domestic</th>
+                                            <th scope="col">extra luggage domestic</th>
+
+                                        </thead>
+                                        <tbody>
+                                          <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.sale_order_flight_dom" t-as="flight">
+                                                <t  t-set="dom_grp_counter"  t-if="flight.flight_type=='DOM-GRP'" t-value="dom_grp_counter + 1"/>
+                                                <t  t-set="dom_sys_counter"  t-if="flight.flight_type=='dom_sys'" t-value="dom_sys_counter + 1"/>
+                                                <t  t-set="dom_without_counter"  t-if="flight.flight_type=='without_flight'" t-value="dom_without_counter + 1"/>
+                                                <t  t-set="dom_extra_bag_on_arr_counter"  t-if="flight.extra_luggage=='extra_bag_on_arr' " t-value="dom_extra_bag_on_arr_counter + 1"/>
+                                                <t  t-set="dom_extra_bag_apr_dep_counter"  t-if="flight.extra_luggage=='extra_bag_apr_dep'" t-value="dom_extra_bag_apr_dep_counter + 1"/>
+                                                <t  t-set="dom_extra_bag_on_dep_counter"  t-if="flight.extra_luggage=='extra_bag_on_dep'" t-value="dom_extra_bag_on_dep_counter + 1"/>
+                                                <t  t-set="dom_hold_counter"  t-if="flight.flight_status=='hold'" t-value="dom_hold_counter + 1"/>
+                                                <t  t-set="dom_issued_counter"  t-if="flight.flight_status=='issued'" t-value="dom_issued_counter + 1"/>
+                                                <t  t-set="dom_waiting_issuing_counter"  t-if="flight.flight_status=='waiting_issuing'" t-value="dom_waiting_issuing_counter + 1"/>
+                                                <t  t-set="dom_sent_to_client_counter"  t-if="flight.flight_status=='sent_to_client'" t-value="dom_sent_to_client_counter + 1"/>
+                                                <t  t-set="dom_depandarv_counter"  t-if="flight.route and flight.route!='arrival_only' and flight.route!='departure_only'" t-value="dom_depandarv_counter + 1"/>
+                                                <t  t-set="dom_dep_counter"  t-if="flight.route=='departure_only'" t-value="dom_dep_counter + 1"/>
+                                                <t  t-set="dom_arv_counter"  t-if="flight.route=='arrival_only'" t-value="dom_arv_counter + 1"/>
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="flight.name"/></td>
+                                                    <td> <t t-esc="flight.flight_status"/></td>
+                                                    <td> <t t-esc="flight.flight_type"/></td>
+                                                    <td> <t t-esc="flight.extra_luggage"/></td>
+                                                </tr>
+                                            </t>
+                                          </t>
+<!--                                            <td> <t t-esc="doc.sale_order_visa.visa_type"/></td>-->
+<!--                                            <td> <t t-esc="doc.sale_order_visa.visa_situation"/></td>-->
+<!--                                            <td> <t t-esc="doc.sale_order_visa.receiving_date"/></td>-->
+<!--                                            <t t-foreach="doc.sale_order_flight_dom" t-as="program"><td> <t t-esc="program.sale_order_program.status"/></td></t>-->
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">visa type</th>
+                                            <th scope="col">situation  </th>
+                                            <th scope="col">receiving  date</th>
+
+                                        </thead>
+                                        <tbody>
+                                          <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.sale_order_visa" t-as="flight">
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="flight.name"/></td>
+                                                    <td> <t t-esc="flight.visa_type"/></td>
+                                                    <td> <t t-esc="flight.visa_situation"/></td>
+                                                    <td> <t t-esc="flight.receiving_date"/></td>
+                                                </tr>
+                                            </t>
+                                          </t>
+<!--                                            <td> <t t-esc="doc.sale_order_visa.visa_type"/></td>-->
+<!--                                            <td> <t t-esc="doc.sale_order_visa.visa_situation"/></td>-->
+<!--                                            <td> <t t-esc="doc.sale_order_visa.receiving_date"/></td>-->
+<!--                                            <t t-foreach="doc.sale_order_flight_dom" t-as="program"><td> <t t-esc="program.sale_order_program.status"/></td></t>-->
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">passport number</th>
+                                            <th scope="col">passport expire date  </th>
+
+                                        </thead>
+                                        <tbody>
+                                          <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.name_of_persons" t-as="flight">
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="flight.name"/></td>
+                                                    <td> <t t-esc="flight.passport_num"/></td>
+                                                    <td> <t t-esc="flight.passport_expiry"/></td>
+                                                </tr>
+                                            </t>
+                                          </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                     <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">program status</th>
+                                            <th scope="col">program name</th>
+                                            <th scope="col">description</th>
+
+                                        </thead>
+                                        <tbody>
+                                          <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.sale_order_program" t-as="flight">
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="flight.name"/></td>
+                                                    <td><span t-field="flight.status"/></td>
+                                                    <td><t t-foreach="flight.program_name" t-as="pro"> <t t-esc="pro.name"/> ,</t></td>
+                                                    <td> <t t-esc="flight.description"/></td>
+                                                </tr>
+                                            </t>
+                                          </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <div class="page">
+                                     <table class="table table-bordered">
+                                        <div class="text-center my-2 font-weight-bold"><h6>flight type</h6></div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>International group</h6></th>
+                                                <th scope="col"><h6>International system</h6></th>
+                                                <th scope="col"><h6>Without flight</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="grp_counter"/></h3></td>
+                                                 <td><h3> <t t-esc="sys_counter"/></h3></td>
+                                                <td><h3> <t t-esc="without_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                    <table class="table table-bordered">
+                                        <div class="text-center my-2 ">extra luggage</div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>Extra Bag Apr and DEP</h6></th>
+                                                <th scope="col"><h6>Extra Bag on ARR</h6></th>
+                                                <th scope="col"><h6>Extra Bag on DEP</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="extra_bag_apr_dep_counter"/></h3></td>
+                                                <td><h3> <t t-esc="extra_bag_on_arr_counter"/></h3></td>
+                                                <td><h3> <t t-esc="extra_bag_on_dep_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                     <table class="table table-bordered">
+                                         <div class="text-center my-2">flight status</div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>hold</h6></th>
+                                                <th scope="col"><h6>issued</h6></th>
+                                                <th scope="col"><h6>waiting issuing</h6></th>
+                                                <th scope="col"><h6>sent to client</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="hold_counter"/></h3></td>
+                                                 <td><h3> <t t-esc="issued_counter"/></h3></td>
+                                                <td><h3> <t t-esc="waiting_issuing_counter"/></h3></td>
+                                                <td><h3> <t t-esc="sent_to_client_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                     <div class="text-center my-2">route</div>
+                                      <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>APR and DEP</h6></th>
+                                                <th scope="col"><h6>departure only</h6></th>
+                                                <th scope="col"><h6>Arrival only</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="depandarv_counter"/></h3></td>
+                                                 <td><h3> <t t-esc="dep_counter"/></h3></td>
+                                                <td><h3> <t t-esc="arv_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+
+
+                                      <table class="table table-bordered">
+                                        <div class="text-center my-2 ">domestic flight type </div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>domestic group</h6></th>
+                                                <th scope="col"><h6>domestic system</h6></th>
+                                                <th scope="col"><h6>Without flight</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="dom_grp_counter"/></h3></td>
+                                                 <td><h3> <t t-esc="dom_sys_counter"/></h3></td>
+                                                <td><h3> <t t-esc="dom_without_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                    <table class="table table-bordered">
+                                        <div class="text-center my-2 ">domestic extra luggage </div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>Extra Bag Apr and DEP</h6></th>
+                                                <th scope="col"><h6>Extra Bag on ARR</h6></th>
+                                                <th scope="col"><h6>Extra Bag on DEP</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="dom_extra_bag_apr_dep_counter"/></h3></td>
+                                                <td><h3> <t t-esc="dom_extra_bag_on_arr_counter"/></h3></td>
+                                                <td><h3> <t t-esc="dom_extra_bag_on_dep_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                     <table class="table table-bordered">
+                                         <div class="text-center my-2">domestic flight status </div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>hold</h6></th>
+                                                <th scope="col"><h6>issued</h6></th>
+                                                <th scope="col"><h6>waiting issuing</h6></th>
+                                                <th scope="col"><h6>sent to client</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="dom_hold_counter"/></h3></td>
+                                                 <td><h3> <t t-esc="dom_issued_counter"/></h3></td>
+                                                <td><h3> <t t-esc="dom_waiting_issuing_counter"/></h3></td>
+                                                <td><h3> <t t-esc="dom_sent_to_client_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                     <div class="text-center my-2">domestic route</div>
+                                      <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h6>APR and DEP</h6></th>
+                                                <th scope="col"><h6>departure only</h6></th>
+                                                <th scope="col"><h6>Arrival only</h6></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h3> <t t-esc="dom_depandarv_counter"/></h3></td>
+                                                 <td><h3> <t t-esc="dom_dep_counter"/></h3></td>
+                                                <td><h3> <t t-esc="dom_arv_counter"/></h3></td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                 </div>
+                            </div>
+
+                    </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

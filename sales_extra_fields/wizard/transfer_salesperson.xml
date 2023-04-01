@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="transfer_salesperson_view_form" model="ir.ui.view">
+        <field name="name">transfer_salesperson_view_form</field>
+        <field name="model">transfer.salesperson</field>
+        <field name="arch" type="xml">
+            <form string="Transfer salesPerson">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="transfer_sales_person" type="object" string="Transfer" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="transfer_salesperson_crm_action_tree" model="ir.actions.server">
+        <field name="name">Transfer SalesPerson</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.get_transfer_wizard()
+        </field>
+    </record>
+
+    <record id="transfer_salesperson_contact_action_tree" model="ir.actions.server">
+        <field name="name">Transfer SalesPerson</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.get_transfer_wizard()
+        </field>
+    </record>
+
+
+</odoo>

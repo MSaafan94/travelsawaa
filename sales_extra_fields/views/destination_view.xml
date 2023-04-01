@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="destination_tree" model="ir.ui.view">
+        <field name="name">destination.tree</field>
+        <field name="model">model.destination</field>
+        <field name="arch" type="xml">
+            <tree string="Destination Models">
+                <field name="destination"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="destination_form" model="ir.ui.view">
+        <field name="name">destination.form</field>
+        <field name="model">model.destination</field>
+        <field name="arch" type="xml">
+            <form string="Destination Model">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="destination"/>
+                            <!--<field name="xml_id"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <!--                        <field name="notes"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_destination" model="ir.actions.act_window">
+        <field name="name">Destination</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">model.destination</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your First Destination !
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="destination_models" name="Destination Models" action="action_destination"
+              parent="sale.menu_sale_config"/>
+</odoo>

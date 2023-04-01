@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record  model="ir.ui.view" id="custom_invoice_form">
+            <field name="name">custom.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_due']" position="after">
+                    <field name="custom_date_due" string="Custom Due Date"/>
+                </xpath>
+            </field>
+        </record>
+        <record  model="ir.ui.view" id="custom_bill_form">
+            <field name="name">custom.bill.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_due']" position="after">
+                    <field name="custom_date_due" string="Custom Due Date"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

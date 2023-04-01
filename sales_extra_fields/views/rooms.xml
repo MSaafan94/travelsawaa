@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="room_number_view_form" model="ir.ui.view">
+            <field name="name">room_number_view_form</field>
+            <field name="model">room.number</field>
+            <field name="arch" type="xml">
+                <form string="Room Number">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="view"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_number_view_tree" model="ir.ui.view">
+            <field name="name">room_number_view_tree</field>
+            <field name="model">room.number</field>
+            <field name="arch" type="xml">
+                <tree string="Room Number">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_number_action" model="ir.actions.act_window">
+            <field name="name">Room Number</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">room.number</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <menuitem id="room_number_menu" name="Room Number" action="room_number_action"
+              parent="sale.menu_sale_config"/>
+
+
+
+
+
+        <record id="room_view_view_form" model="ir.ui.view">
+            <field name="name">room_view_view_form</field>
+            <field name="model">room.view</field>
+            <field name="arch" type="xml">
+                <form string="Room View">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_view_view_tree" model="ir.ui.view">
+            <field name="name">room_view_view_tree</field>
+            <field name="model">room.view</field>
+            <field name="arch" type="xml">
+                <tree string="Room View">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_view_action" model="ir.actions.act_window">
+            <field name="name">Room View</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">room.view</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="room_view_menu" name="Room View" action="room_view_action"
+              parent="sale.menu_sale_config"/>
+
+
+
+        <record id="room_special_view_form" model="ir.ui.view">
+            <field name="name">room_special_view_form</field>
+            <field name="model">room.special</field>
+            <field name="arch" type="xml">
+                <form string="Room Special">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_special_view_tree" model="ir.ui.view">
+            <field name="name">room_special_view_tree</field>
+            <field name="model">room.special</field>
+            <field name="arch" type="xml">
+                <tree string="Room Special">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_special_action" model="ir.actions.act_window">
+            <field name="name">Room Special</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">room.special</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="room_special_menu" name="Room Special" action="room_special_action"
+              parent="sale.menu_sale_config"/>
+
+
+        <record id="room_type_view_form" model="ir.ui.view">
+            <field name="name">room_type_view_form</field>
+            <field name="model">room.type</field>
+            <field name="arch" type="xml">
+                <form string="Room Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_type_view_tree" model="ir.ui.view">
+            <field name="name">room_type_view_tree</field>
+            <field name="model">room.type</field>
+            <field name="arch" type="xml">
+                <tree string="Room Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_type_action" model="ir.actions.act_window">
+            <field name="name">Room Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">room.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="room_type_menu" name="Room Type" action="room_type_action"
+              parent="sale.menu_sale_config"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="sale_order_template_form_inh">
+            <field name="name">sale.order.template.form.inh</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='require_signature']" position="before">
+                    <field name="warehouse_id" string="Warehouse"/>
+                </xpath>
+                <xpath expr="//notebook[@name='main_book']" position="before">
+                    <group>
+                        <group>
+                            <!--                            <div>-->
+                            <!--                                <label for="warehouse_id" string="Warehouse"/>-->
+                            <!--                                <field name="warehouse_id" string="Warehouse"/>-->
+                            <!--                            </div>-->
+                            <div>
+                                <label for="destination" string="Destination"/>
+                                <field name="destination" string="Destination"/>
+                            </div>
+                            <div>
+                                <label for="hotel" string="Hotel"/>
+                                <field name="hotel" widget="many2many_tags"
+                                       options="{'color_field': 'color', 'no_create_edit': True}"
+                                       placeholder="Tags..."/>
+                            </div>
+                            <div>
+                                <label for="starttime" string="From"/>
+                                <field name="starttime" string="From"/>
+                            </div>
+                            <div>
+                                <label for="endtime" string="To"/>
+                                <field name="endtime" string="To"/>
+
+                            </div>
+                            <div class="o_row">
+                                <label for="duration" string="Duration"/>
+                                <field name="duration" string="Duration" force_save="1"/>
+                                <label for="duration" string="Nights"/>
+                            </div>
+                            <div>
+                                <label for="arranged" string="Arranged"/>
+                                <field name="arranged" string="Arranged"/>
+                            </div>
+                            <div class="o_row">
+                                <label for="month" string="Month"/>
+                                <field name="month" string="Month"/>
+                            </div>
+                            <div>
+                                 <label for="year" string="Year"/>
+                                <field name="year" string="year"/>
+                            </div>
+
+                        </group>
+                        <group>
+                            <div>
+                                <label for="need_room_mate" string="Need Room Mate"/>
+                                <field name="need_room_mate" string="Need Room Mate" widget="radio"/>
+                            </div>
+                            <div>
+                                <label for="no_of_accompanying_persons" string="No of Accompanying Persons"/>
+                                <field name="no_of_accompanying_persons" string="No of Accompanying Persons"/>
+                            </div>
+                            <!--                            <div>-->
+                            <!--                                <label for="name_of_persons" string="Names of Persons"/>-->
+                            <!--                                <field name="name_of_persons" string="Names of Persons"/>-->
+                            <!--                            </div>-->
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="individual"/>
+                            <field name="cut_of_date"/>
+                            <field name="analytic_account"/>
+                            <field name="analytic_tag_ids"/>
+                        </group>
+                        <group>
+                                <button name="apply_analytic_tags" type="object" string="Assign Analytic Tags" class="btn-primary"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='sale_order_template_option_ids']//tree/field[@name='discount']"
+                       position="replace">
+                    <field name="discount" invisible="1"/>
+                    <field name="template_name" invisible="1"/>
+<!--                    <field name="total"/>-->
+                </xpath>
+                <xpath expr="//field[@name='sale_order_template_option_ids']//tree/field[@name='product_id']"
+                       position="before">
+                    <field name="sequence" widget="handle"/>
+                </xpath>
+                <xpath expr="//field[@name='sale_order_template_option_ids']//tree/field[@name='name']"
+                       position="after">
+                    <field name="analytic_tag_ids"/>
+<!--                    <field name="hotel"/>-->
+                </xpath>
+
+                <xpath expr="//field[@name='sale_order_template_option_ids']//tree/field[@name='quantity']"
+                       position="after">
+                    <field name="inventory"/>
+                    <field name="product_category" invisible="1"/>
+                    <field name="stock" string="Sold"/>
+                    <field name="available"/>
+                </xpath>
+                <xpath expr="//notebook[@name='main_book']" position="inside">
+                    <page string="Attachments" name="attachments">
+                        <field name="attachment_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="attachment_id" widget="many2many_binary"/>
+                                <field name="tag_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="sale_order_template_view_search_inherit">
+            <field name="name">sale.order.template.form.inh</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sale_management.sale_order_template_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='inactive']" position="after">
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="month" string="Month" context="{'group_by': 'month'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

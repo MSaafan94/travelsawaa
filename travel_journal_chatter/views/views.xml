@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+      <record model="ir.ui.view" id="journal_form_inh" >
+          <field name="name">journal.form.inh</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//form/sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+            </field>
+      </record>
+  </data>
+</odoo>

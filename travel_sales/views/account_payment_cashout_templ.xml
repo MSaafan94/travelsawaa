@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_payment_cashout_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="page" style="font-size:15px;">
+                    <h3 class="text-center">Payment Cash Out</h3>
+                    <h6 class="text-center" style="color:red;">
+                        <strong>No:
+                            <span t-field="o.name"/>
+                        </strong>
+                    </h6>
+                    <br/>
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-6 ">
+                            <strong>
+                                <span>Due Date :</span>
+                            </strong>
+                            <span t-field="o.payment_date"/>
+                        </div>
+                        <t t-if="o.with_cheque">
+                            <div class="col-6 text-right">
+                                <span t-field="o.cheque_number"/>
+                                <strong>
+                                    <span>: Cheque No.</span>
+                                </strong>
+
+                            </div>
+                        </t>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <strong>
+                                <span>Received From :</span>
+                            </strong>
+                            <span t-field="o.partner_id.name"/>
+                        </div>
+                        <t t-if="o.with_cheque">
+                            <div class="col-6 text-right">
+                                <span t-field="o.cheque_date"/>
+                                <strong>
+                                    <span>: Cheque Date</span>
+                                </strong>
+                            </div>
+                        </t>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <strong>
+                                <span>The Sum Of :</span>
+                            </strong>
+                            <span t-field="o.amount"/>
+                            (
+                            <span t-esc="o.currency_id.amount_to_text(o.amount)"/>
+                            )
+                        </div>
+                        <t t-if="o.with_cheque">
+                            <div class="col-6 text-right">
+                                <span t-field="o.bank_name"/>
+                                <strong>
+                                    <span> : Bank Name</span>
+                                </strong>
+
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 ">
+                            <strong>
+                                <span>Payment Method :</span>
+                            </strong>
+                            <span t-field="o.journal_id.name"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 ">
+                            <strong>
+                                <span>Payment Create User :</span>
+                            </strong>
+                            <span t-field="o.user"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <t t-if="o.sale_id">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <strong>
+                                    <span>Description :</span>
+                                </strong>
+                                <span t-field="o.sale_id.sale_order_template_id.name"/>
+                            </div>
+                        </div>
+                    </t>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <t t-if="o.approved_user">
+                        <div class="row text-right" style="margin-top:-65px;">
+                            <div class="col-12">
+                                <strong>
+                                    <span>Approved By :</span>
+                                </strong>
+                                <span t-field="o.approved_user"/>
+                            </div>
+                        </div>
+                    </t>
+                    <br/>
+                    <br/>
+                </div></t>
+    </template>
+
+    <template id="report_payment_cashout">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="travel_sales.report_payment_cashout_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

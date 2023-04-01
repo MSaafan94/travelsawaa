@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <template id="sale_management.report_saleorder_document_inherit_sale_management"
+                  inherit_id="sale.report_saleorder_document">
+        </template>
+        <template id="saleorder_document_view" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//span[@t-field='line.name']" position="replace">
+                <span t-field="line.product_id.display_name"/>
+            </xpath>
+            <xpath expr="//table[hasclass('o_main_table')]" position="before">
+                <strong>Trip Reference :</strong>&#160;<sapn t-field="doc.sale_order_template_id.name"/>
+                <br/>
+                <strong>Destination :</strong>&#160;<sapn t-field="doc.destination.destination"/>
+                <br/>
+                <strong>Hotel :</strong>&#160;
+                <t t-foreach="doc.hotel" t-as="hotel">
+                    <sapn t-esc="hotel.hotel"/>,&#160;
+                </t>
+                <br/>
+                <strong>From :</strong>&#160;<sapn t-field="doc.starttime"/>&#160;&#160;&#160;
+                <strong>To :</strong>&#160;<sapn t-field="doc.endtime"/>
+                <br/>
+                <strong>Duration :</strong>&#160;<sapn t-field="doc.duration"/>&#160; Night
+                <br/>
+                <strong>Need Room Mate :</strong>&#160;<sapn t-field="doc.need_room_mate"/>
+                <br/>
+                <strong>No of Accompanying Persons :</strong>&#160;<sapn t-field="doc.no_of_accompanying_persons"/>
+                <br/>
+                <strong>Name of Persons :</strong>&#160;
+                <t t-foreach="doc.name_of_persons" t-as="person">
+                    <sapn t-field="person.name"/>,
+                </t>
+                <br/>
+                <t t-if="doc.infant"><strong>Infant :</strong> &#160; <sapn t-field="doc.infant"/></t>
+                <t t-if="doc.child"><strong>Child :</strong> &#160;<sapn t-field="doc.child"/></t>
+                <t t-if="doc.adult"><strong>Adult :</strong> &#160; <sapn t-field="doc.adult"/></t>
+                <br/>
+            </xpath>
+            <xpath expr="//tr[hasclass('o_total')]" position="after">
+                <tr class="border-black o_payments">
+                    <td>
+                        <strong>Total Paid</strong>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="doc.total_payments"/>
+                    </td>
+                </tr>
+                <tr class="border-black o_due">
+                    <td>
+                        <strong>Total Due</strong>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="doc.total_due"/>
+                    </td>
+                </tr>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

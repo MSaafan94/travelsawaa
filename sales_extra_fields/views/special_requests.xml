@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="special_requests_view_form" model="ir.ui.view">
+            <field name="name">special_requests_view_form</field>
+            <field name="model">special.requests</field>
+            <field name="arch" type="xml">
+                <form string="Special Requests">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="special_requests_view_tree" model="ir.ui.view">
+            <field name="name">special_requests_view_tree</field>
+            <field name="model">special.requests</field>
+            <field name="arch" type="xml">
+                <tree string="Special Requests">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="special_requests_action" model="ir.actions.act_window">
+            <field name="name">Special Requests</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">special.requests</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="special_requests_menu" name="Special Requests" action="special_requests_action"
+              parent="sale.menu_sale_config"/>
+    </data>
+</odoo>

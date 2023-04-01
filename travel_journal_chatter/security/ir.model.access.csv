@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_journal_chatter_travel_journal_chatter,travel_journal_chatter.travel_journal_chatter,model_travel_journal_chatter_travel_journal_chatter,,1,0,0,0

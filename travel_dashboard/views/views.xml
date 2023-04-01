@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+      <record id="dashboard_tree_view" model="ir.ui.view">
+        <field name="name">dashboard.tree</field>
+        <field name="model">custom.sales.dashboard</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+      </record>
+
+      <record id="dashboard_form_view" model="ir.ui.view">
+        <field name="name">dashboard.form</field>
+        <field name="model">custom.sales.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="School">
+                <field name="destination"/>
+                <field name="trip"/>
+                <group col="3">
+                    <group>
+                        <field name="available_rooms"/>
+                        <field name="stock_rooms" />
+                    </group>
+                    <group>
+                        <field name="available_visa"/>
+                        <field name="stock_visa" />
+                    </group>
+                    <group>
+                        <field name="cut_of_date"/>
+                        <field name="remaining_days"/>
+                    </group>
+                </group>
+                <group col="3">
+                    <group>
+                        <field name="available_program"/>
+                        <field name="stock_program" />
+                    </group>
+                    <group>
+                        <field name="available_domestic"/>
+                        <field name="stock_domestic" />
+                    </group>
+                    <group>
+                        <field name="available_international"/>
+                        <field name="stock_international"/>
+                    </group>
+                </group>
+                <group col="3">
+                    <group>
+                        <field name="total_amount"/>
+                        <field name="total_paid"/>
+                        <field name="total_due"/>
+                    </group>
+
+                    <group>
+                        <field name="total_adults"/>
+                        <field name="total_children"/>
+                        <field name="total_infants"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+
+    </record>
+
+
+      <record model="ir.actions.act_window" id="travel_dashboard_action">
+            <field name="name">Dashboard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">custom.sales.dashboard</field>
+            <field name="view_mode">tree,form</field>
+      </record>
+
+<!--      <menuitem id="travel_dashboard_d" sequence="3" name="Travel Dashboard2" parent="travel_dashboard"/>-->
+      <menuitem id="travel_dashboard" sequence="2" name="Travel Dashboard" action="travel_dashboard_action"/>
+  </data>
+</odoo>

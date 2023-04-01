@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="create_res_partner_wizard" model="ir.ui.view">
+        <field name="name">res.partner.wizard</field>
+        <field name="model">res.partner.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Contact">
+                <group>
+                    <field name="contact_type" widget="radio" invisible="1"/>
+                    <field name="contact_name" attrs="{'invisible':[('contact_type','!=','New')]}"/>
+                    <field name="contact" attrs="{'invisible':[('contact_type','=','New')]}"/>
+                    <field name="relation"/>
+                    <field name="mobile" widget="phone"/>
+                    <field name="phone" widget="phone"/>
+                    <field name="service_type"/>
+                    <field name="whatsapp_num"/>
+                    <field name="birthday"/>
+                    <label for="years" string="Age"/>
+                    <div>
+                        <field name="years" nolabel="1" class="oe_inline" force_save="1" readonly="1" />
+                        <span class="ml8">Years</span>
+                        <field name="months" nolabel="1" class="oe_inline ml8" force_save="1" readonly="1" />
+                        <span class="ml8">Months</span>
+                        <field name="days" nolabel="1" class="oe_inline ml8" force_save="1" readonly="1" />
+                        <span class="ml8">Days</span>
+                    </div>
+                    <field name="age_type"/>
+                    <field name="lead_source" required="0"/>
+                    <field name="destination_1"/>
+                </group>
+                <footer>
+                    <button class="btn-primary" name="add_contact" type="object" string="ADD"/>
+                    Or
+                    <button class="btn-primary" name="create_contact" type="object" string="Create New Contact"/>
+                    Or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    
+    <!-- Created new action for wizard-->
+    <record id="action_create_res_partner" model="ir.actions.act_window">
+        <field name="name">Create Partner</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res_partner_form_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="relation" attrs="{'invisible':[('company_type','=','company')]}"/>
+                    <field name="service_type"/>
+                         <label for ='whatsapp_num' />
+                     <div class="0-row">
+                         <field name="whatsapp_num" filter_domain="[('whatsapp_num','ilike',self)]"/>
+                         <button icon="fa-whatsapp" style="color:#25D366;border:none" help="Send WhatsApp Message" name="open_whatsapp_web" type="object" attrs="{'invisible': [('whatsapp_num', '=', False)]}"/>
+                         <button icon="fa-whatsapp" style="color:#d3254e;border:none" help="Send WhatsApp Message" name="open_whatsapp_mobile" type="object" attrs="{'invisible': [('whatsapp_num', '=', False)]}"/>
+                    </div>
+                    <field name="gender"/>
+                    <field name="birthday" required="1"/>
+                    <label for="years" string="Age"/>
+                    <div>
+                        <field name="years" nolabel="1" class="oe_inline" force_save="1" readonly="1" />
+                        <span class="ml8">Years</span>
+                        <field name="months" nolabel="1" class="oe_inline ml8" force_save="1" readonly="1" />
+                        <span class="ml8">Months</span>
+                        <field name="days" nolabel="1" class="oe_inline ml8" force_save="1" readonly="1" />
+                        <span class="ml8">Days</span>
+                    </div>
+                    <field name="age_type"/>
+                    <field name="trip_code"/>
+                    <field name="passport_num"/>
+                    <field name="passport_expiry"/>
+                    <field name="lead_source"/>
+                    <field name="id_number"/>
+                    <field name="destination_1"/>
+                    <field name="booking_status"/>
+                    <field name="owner"/>
+                    <field name="created_at"/>
+                    <field name="Description"/>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="old_data"/>
+                    <field name="previous_trips" attrs="{'invisible':[('old_data','=',False)]}"/>
+                    <field name="amount" attrs="{'invisible':[('old_data','=',False)]}"/>
+                    <field name="points_of_loyalty" attrs="{'invisible':[('old_data','=',False)]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']" position="before">
+                    <button name="%(action_create_res_partner)d" type="action" class="btn-primary" string="Add New or Existing Customer"/>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']/form/sheet/group/group/field[@name='name']" position="after">
+                    <field name="relation" />
+                </xpath>
+                <xpath expr="//div[@t-if='record.mobile.raw_value']" position="after">
+                    <div >Relationship: <field name="relation"/></div>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_partner_search_view_inherit" model="ir.ui.view">
+            <field name="name">res_partner_search_view_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="service_type" filter_domain="[('service_type','ilike',self)]"/>
+                    <field name="whatsapp_num" filter_domain="[('whatsapp_num','ilike',self)]"/>
+                    <field name="gender" filter_domain="[('gender','ilike',self)]"/>
+                    <field name="birthday" filter_domain="[('birthday','ilike',self)]"/>
+<!--                    <field name="age" filter_domain="[('age','ilike',self)]"/>-->
+                    <field name="trip_code" filter_domain="[('trip_code','ilike',self)]"/>
+                    <field name="passport_num" filter_domain="[('passport_num','ilike',self)]"/>
+                    <field name="passport_expiry" filter_domain="[('passport_expiry','ilike',self)]"/>
+                    <field name="lead_source" filter_domain="[('lead_source','ilike',self)]"/>
+                    <field name="id_number" filter_domain="[('id_number','ilike',self)]"/>
+                    <field name="destination_1" filter_domain="[('destination_1','ilike',self)]"/>
+                    <field name="booking_status" filter_domain="[('booking_status','ilike',self)]"/>
+                    <field name="owner" filter_domain="[('owner','ilike',self)]"/>
+                    <field name="created_at" filter_domain="[('created_at','ilike',self)]"/>
+                    <field name="previous_trips" filter_domain="[('previous_trips','ilike',self)]"/>
+                    <field name="amount" filter_domain="[('amount','ilike',self)]"/>
+                    <field name="points_of_loyalty" filter_domain="[('points_of_loyalty','ilike',self)]"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

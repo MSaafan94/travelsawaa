@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="operation_form_view" model="ir.ui.view">
+            <field name="name">operation.operation.form</field>
+            <field name="model">operation.operation</field>
+            <field name="arch" type="xml">
+                <form string="operation">
+                    <sheet>
+                        <div class="oe_title">
+<!--                            <label for="example_title"/>-->
+                            <h1>
+<!--                                <field name="name" placeholder="name"/>-->
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="trip_reference"/>
+                                <field name="sale_orders">
+                        <tree>
+                            <field name="partner_id"/>
+                        </tree>
+                                </field>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!--        <record id="operation_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">operation.operation.tree</field>-->
+<!--            <field name="model">operation.operation</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="operation">-->
+<!--                    <field name="create_date"/>-->
+<!--                    <field name="name"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+        <record id="operation_action" model="ir.actions.act_window">
+            <field name="name">Operation</field>
+            <field name="res_model">operation.operation</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem  name="operation" id="operation_root_menu"/>
+        <menuitem name="operation" id="operation_menu" parent="operation_root_menu" action="operation_action"/>
+
+    </data>
+</odoo>

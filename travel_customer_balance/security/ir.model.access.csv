@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hak_customer_balance_hak_customer_balance,hak_customer_balance.hak_customer_balance,model_hak_customer_balance_hak_customer_balance,base.group_user,1,1,1,1

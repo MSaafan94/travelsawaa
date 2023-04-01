@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="meal_plan_view_form" model="ir.ui.view">
+            <field name="name">meal_plan_view_form</field>
+            <field name="model">meal.plan</field>
+            <field name="arch" type="xml">
+                <form string="Meal Plan">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="meal_plan_view_tree" model="ir.ui.view">
+            <field name="name">meal_plan_view_tree</field>
+            <field name="model">meal.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Meal Plan">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="meal_plan_action" model="ir.actions.act_window">
+            <field name="name">Meal Plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">meal.plan</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="meal_plan_menu" name="Meal Plan" action="meal_plan_action"
+              parent="sale.menu_sale_config"/>
+    </data>
+</odoo>

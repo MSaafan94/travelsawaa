@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="program_view_form" model="ir.ui.view">
+            <field name="name">program_view_form</field>
+            <field name="model">program</field>
+            <field name="arch" type="xml">
+                <form string="Program">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="program_view_tree" model="ir.ui.view">
+            <field name="name">program_view_tree</field>
+            <field name="model">program</field>
+            <field name="arch" type="xml">
+                <tree string="Program">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="program_action" model="ir.actions.act_window">
+            <field name="name">Program</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">program</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="program_menu" name="Program" action="program_action"
+              parent="sale.menu_sale_config"/>
+
+
+        <record id="add_program_view_form" model="ir.ui.view">
+            <field name="name">add_program_view_form</field>
+            <field name="model">add.program</field>
+            <field name="arch" type="xml">
+                <form string="Add Program">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="add_program_view_tree" model="ir.ui.view">
+            <field name="name">add_program_view_tree</field>
+            <field name="model">add.program</field>
+            <field name="arch" type="xml">
+                <tree string="Add Program">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="add_program_action" model="ir.actions.act_window">
+            <field name="name">Add Program</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">add.program</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="add_program_menu" name="Add Program" action="add_program_action"
+              parent="sale.menu_sale_config"/>
+
+    </data>
+</odoo>

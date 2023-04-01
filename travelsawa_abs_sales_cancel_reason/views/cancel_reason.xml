@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cancel_reason_view_form" model="ir.ui.view">
+            <field name="name">cancel_reason_view_form</field>
+            <field name="model">quotation.cancel.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="cancel_reason_view_tree" model="ir.ui.view">
+            <field name="name">cancel_reason_view_tree</field>
+            <field name="model">quotation.cancel.reason</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="cancel_reason_action" model="ir.actions.act_window">
+            <field name="name">Cancel Reason</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">quotation.cancel.reason</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cancel_reason" name="Cancel Reason" action="cancel_reason_action"
+              parent="sale.menu_sale_config"/>
+        <record id="cancel_status_view_form" model="ir.ui.view">
+            <field name="name">cancel_status_view_form</field>
+            <field name="model">status.paid.cancel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="cancel_reason_view_tree" model="ir.ui.view">
+            <field name="name">cancel_status_view_tree</field>
+            <field name="model">status.paid.cancel</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="cancel_status_action" model="ir.actions.act_window">
+            <field name="name">Cancel status</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">status.paid.cancel</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="cancel_status" name="Cancel status" action="cancel_status_action"
+              parent="sale.menu_sale_config"/>
+
+    </data>
+</odoo>

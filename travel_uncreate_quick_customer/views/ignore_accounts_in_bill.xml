@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+            <field name="name">invoice.supplier.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']" position="replace">
+                    <field name="invoice_line_ids">
+                        <field name="product_id"/>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

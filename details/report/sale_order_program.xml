@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="report_sale_program"
+                model="sale.order"
+                string="program report"
+                name="details.sale_program"
+                file="details.sale_program"
+                report_type="qweb-pdf"/>
+
+        <template id="sale_program">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th scope="col">serial</th>
+                                            <th scope="col">passenger</th>
+                                            <th scope="col">program status</th>
+                                            <th scope="col">program name</th>
+                                            <th scope="col">description</th>
+
+                                        </thead>
+                                        <tbody>
+                                          <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.sale_order_program" t-as="flight">
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="flight.name"/></td>
+                                                    <td><span t-field="flight.status"/></td>
+                                                    <td><t t-foreach="flight.program_name" t-as="pro"> <t t-esc="pro.name"/> ,</t></td>
+                                                    <td> <t t-esc="flight.description"/></td>
+                                                </tr>
+                                            </t>
+                                          </t>
+                                        </tbody>
+                                    </table>
+                    </div>
+              </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

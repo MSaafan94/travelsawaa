@@ -1,0 +1,35 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="remove_add_product">
+      <field name="name">remove_add_product</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+<!--          <xpath expr="//page/field[@name='sale_order_option_ids']" position="replace">-->
+
+<!--                    <field name="sale_order_option_ids">-->
+<!--                        <tree string="Sales Quotation Template Lines" >-->
+<!--                            <control>-->
+<!--                                <create string="Add a product" groups="sales_team.group_sale_manager"/>-->
+<!--                            </control>-->
+<!--                            <field name="sequence" widget="handle"/>-->
+<!--                            <field name="product_id"/>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="quantity"/>-->
+<!--                            <field name="uom_id" groups="uom.group_uom"/>-->
+<!--                            <field name="price_unit"/>-->
+<!--                            <field name="discount" groups="sale.group_discount_per_so_line"/>-->
+<!--                            <button name="button_add_to_order" class="oe_link" icon="fa-shopping-cart" string="Add to order lines" type="object"/>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+
+<!--            </xpath>-->
+        <xpath expr="//page[@name='order_lines']//tree" position="attributes">
+            <attribute name="create">0</attribute>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

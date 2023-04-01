@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="account_payment_form_inherit" model="ir.ui.view">
+            <field name="name">account_payment_form_inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_transaction_id']" position="after">
+                    <field name="trip_reference"  force_save="1"/>
+                    <field name="with_cheque"/>
+                    <field name="cheque_number" attrs="{'invisible': [('with_cheque', '=', False)]}"/>
+                    <field name="cheque_date" attrs="{'invisible': [('with_cheque', '=', False)]}"/>
+                    <field name="bank_name" attrs="{'invisible': [('with_cheque', '=', False)]}"/>
+                    <field name="user"/>
+                    <field name="approved_user"/>
+                </xpath>
+                 <xpath expr="//field[@name='journal_id']" position="after">
+                                         <field name="sale_id" />
+                 </xpath>
+
+<!--                <xpath expr="//button[@name='post']" position="replace">-->
+<!--&lt;!&ndash;                    <attribute name="attrs">{"invisible":[('payment_type','=','inbound')]}</attribute>&ndash;&gt;-->
+<!--                        <button name="post" class="oe_highlight"  attrs="{'invisible':[('payment_type', '=', 'inbound')]}" states="draft" string="Confirm" type="object"/>-->
+
+<!--                </xpath>-->
+            </field>
+        </record>
+
+        <!-- Inherit Search View to Modify it -->
+        <record id="view_account_payment_search_inherit" model="ir.ui.view">
+            <field name="name">view_account_payment_search_inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//filter[@name='partner']" position="after">
+                   <filter string="Trip Reference" name="trip_reference" domain="[]" context="{'group_by': 'trip_reference'}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+         <!-- Inherit tree View to Modify it -->
+        <record id="view_account_payment_search_inherit" model="ir.ui.view">
+            <field name="name">view_account_payment_search_inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='state']" position="before">
+                   <field  name="trip_reference"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

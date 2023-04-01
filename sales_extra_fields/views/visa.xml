@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="visa_type_view_form" model="ir.ui.view">
+            <field name="name">visa_type_view_form</field>
+            <field name="model">visa.type</field>
+            <field name="arch" type="xml">
+                <form string="Visa Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="visa_type_view_tree" model="ir.ui.view">
+            <field name="name">visa_type_view_tree</field>
+            <field name="model">visa.type</field>
+            <field name="arch" type="xml">
+                <tree string="Visa Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="visa_type_action" model="ir.actions.act_window">
+            <field name="name">Visa Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">visa.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="visa_type_menu" name="Visa Type" action="visa_type_action"
+              parent="sale.menu_sale_config"/>
+
+
+
+
+        <record id="visa_situation_view_form" model="ir.ui.view">
+            <field name="name">visa_situation_view_form</field>
+            <field name="model">visa.situation</field>
+            <field name="arch" type="xml">
+                <form string="Visa Situation">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="visa_situation_view_tree" model="ir.ui.view">
+            <field name="name">visa_situation_view_tree</field>
+            <field name="model">visa.situation</field>
+            <field name="arch" type="xml">
+                <tree string="Visa Situation">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="visa_situation_action" model="ir.actions.act_window">
+            <field name="name">Visa Situation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">visa.situation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="visa_situation_menu" name="Visa Situation" action="visa_situation_action"
+              parent="sale.menu_sale_config"/>
+    </data>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="full_sale_accomodation_report"
+                model="sale.order"
+                string="accomodation report"
+                name="details.full_sale_accomodation_templete"
+                file="details.full_sale_accomodation_templete"
+                report_type="qweb-pdf"/>
+
+        <template id="full_sale_accomodation_templete">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+
+                                <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">serial</th>
+                                                <th scope="col">passenger</th>
+                                                <th scope="col">age</th>
+                                                <th scope="col">age type</th>
+                                                <th scope="col">relationship</th>
+                                                <th scope="col">whatsApp</th>
+                                                <th scope="col">nights</th>
+                                                <th scope="col">room id</th>
+                                                <th scope="col">room type</th>
+                                                <th scope="col">Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <t t-foreach="docs" t-as="doc">
+                                            <t t-foreach="doc.sale_order_accommodation" t-as="accomodtion">
+                                                <tr>
+                                                    <td><spqn  class="text-danger " t-field="doc.name"></spqn></td>
+                                                    <td><span t-field="accomodtion.name"/></td>
+                                                    <td><span t-field="accomodtion.age"/></td>
+                                                    <td><span t-field="accomodtion.age_type"/></td>
+                                                    <td><span t-field="accomodtion.relation"/></td>
+                                                    <td><span t-field="accomodtion.whatsapp_num"/></td>
+                                                    <td><span t-field="accomodtion.no_of_nights"/></td>
+                                                    <td><span t-field="accomodtion.room_id"/></td>
+                                                    <td><span t-field="accomodtion.room_type"/></td>
+                                                    <td><span t-field="accomodtion.notes"/></td>
+                                                </tr>
+                                            </t>
+                                            </t>
+                                        </tbody>
+                                 </table>
+                        </div>
+                    </t>
+                </t>
+        </template>
+
+    </data>
+</odoo>

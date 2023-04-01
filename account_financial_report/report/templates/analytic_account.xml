@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="analytic_account" inherit_id="report_general_ledger_base">
+        <xpath expr="//div[hasclass('page2')]" position="before">
+            <t t-if="o.filter_cost_center_ids">
+            <br/>
+                <div class="act_as_table data_table" style="width: 100%;">
+                    <div class="act_as_row labels left">
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Account </div>
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Debit </div>
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Credit </div>
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Balance </div>
+                    </div>
+                </div>
+                <t t-foreach="o.account_ids" t-as="account">
+                    <t t-if="not account.code == '2130000'">
+                        <div class="act_as_table data_table" style="width: 100%;">
+                           <div class="act_as_row">
+                                <div class="act_as_cell" style="font-size:15px; width:25%;" > <span t-field="account.code"/> - <span t-field="account.name"/> </div>
+                                <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="account.final_debit"/>
+                                <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="account.final_credit"/>
+                                <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="account.final_balance"/>
+                           </div>
+                        </div>
+                    </t>
+                </t>
+                <div class="act_as_table data_table" style="width: 100%;">
+                    <div class="act_as_row labels">
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Analytic Name </div>
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Total debit </div>
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Total credit </div>
+                        <div class="act_as_cell" style="font-size:15px; width:25%"> Balance </div>
+                    </div>
+                </div>
+<!--            <t t-foreach="o.cost_center_ids" t-as="analytic">-->
+                <t t-foreach="o.filter_cost_center_ids" t-as="analytic">
+                    <div class="act_as_table data_table" style="width: 100%;">
+                        <div class="act_as_row">
+                            <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="analytic.name"/>
+                            <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="analytic.debit"/>
+                            <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="analytic.credit"/>
+                            <div class="act_as_cell" style="font-size:15px; width:25%;" t-field="analytic.balance"/>
+                        </div>
+                    </div>
+                </t>
+                <br/>
+             </t>
+        </xpath>
+    </template>
+</odoo>

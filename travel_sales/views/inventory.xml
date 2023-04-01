@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model='ir.ui.view' id="inventory_custom">
+            <field name="name">invvv</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_ok']" position="before">
+                    <label for="product_category"/>
+                    <field name="product_category"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id="template_inventory_custom">
+            <field name="name">templateinvvv</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='analytic_tag_ids']" position="after">
+<!--                    <group col="2">-->
+<!--                        <group>-->
+                    <field name="total_amount" invisible="1"/>
+                    <field name="total_paid" invisible="1"/>
+                    <field name="total_due" invisible="1"/>
+
+                        <field name="total_rooms"/>
+                        <field name="available_rooms" />
+<!--                                   widget="percentpie"/>-->
+                        <field name="stock_rooms"/>
+<!--                                   widget="gauge" style="width:120px;height:90px;cursor:pointer;"-->
+<!--                                options="{'max_field':'available_rooms'}">-->
+<!--                                EntryProgress-->
+<!--                            </field>-->
+<!--                        </group>-->
+<!--                        <group>-->
+                        <field name="total_visa" invisible="1"/>
+                        <field name="available_visa" invisible="1"/>
+                        <field name="stock_visa" invisible="1"/>
+
+                        <field name="total_program" invisible="1"/>
+                        <field name="available_program" invisible="1"/>
+                        <field name="stock_program" invisible="1"/>
+
+                        <field name="total_domestic" invisible="1"/>
+                        <field name="available_domestic" invisible="1"/>
+                        <field name="stock_domestic" invisible="1"/>
+
+                        <field name="total_international" invisible="1"/>
+                        <field name="available_international" invisible="1"/>
+                        <field name="stock_international" invisible="1"/>
+
+                        <field name="total_adults" invisible="1"/>
+                        <field name="total_children" invisible="1"/>
+                        <field name="total_infants" invisible="1"/>
+
+
+<!--                        </group>-->
+<!--                    </group>-->
+                </xpath>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id="sale_order_inventory_custom">
+            <field name="name">saleorderinvvv</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='roommate_name']" position="after">
+                    <field name="total_rooms" invisble="1"/>
+                </xpath>
+            </field>
+
+        </record>
+    </data>
+</odoo>
