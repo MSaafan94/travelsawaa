@@ -9,6 +9,9 @@ from odoo.exceptions import ValidationError
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+
+    salez = fields.Integer()
+
     service_type = fields.Many2one('service.type', "Service Type")
     whatsapp_num = fields.Char("WhatsApp Number")
     gender = fields.Selection([
